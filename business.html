@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Business Information Form</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            background-image: url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            text-align: center;
+            
+            margin: 0;
+            padding: 0;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: #89d8ef;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 60px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007ACC;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="tel"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Business Information Form</h1>
+        <form id="businessForm" onsubmit="return validateForm()" method = "post" action = "ee2.php">
+            <label for="business_id">Business ID (Primary Key):</label>
+            <input type="text" id="business_id" name="business_id" required>
+            <br><br>
+
+            <label for="owner_id">Owner ID:</label>
+            <input type="text" id="owner_id" name="owner_id" required>
+            <br><br>
+
+            <label for="business_name">Business Name:</label>
+            <input type="text" id="business_name" name="business_name" required>
+            <br><br>
+
+            <label for="business_type">Business Type:</label>
+            <input type="text" id="business_type" name="business_type" required>
+            <br><br>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            <small id="dateError" style="color: red;"></small>
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var businessID = document.getElementById('business_id').value;
+            if (businessID.trim() === '') {
+                alert('Business ID is required!');
+                return false;
+            }
+
+            var ownerID = document.getElementById('owner_id').value;
+            if (ownerID.trim() === '') {
+                alert('Owner ID is required!');
+                return false;
+            }
+
+            var businessName = document.getElementById('business_name').value;
+            if (businessName.trim() === '') {
+                alert('Business Name is required!');
+                return false;
+            }
+
+            var businessType = document.getElementById('business_type').value;
+            if (businessType.trim() === '') {
+                alert('Business Type is required!');
+                return false;
+            }
+
+            var startDate = document.getElementById('start_date').value;
+            var dateError = document.getElementById('dateError');
+            if (startDate.trim() === '') {
+                dateError.innerText = 'Start Date is required!';
+                return false;
+            } else {
+                var dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+                if (!dateRegex.test(startDate)) {
+                    dateError.innerText = 'Please enter a valid date (YYYY-MM-DD)!';
+                    return false;
+                } else {
+                    dateError.innerText = '';
+                }
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

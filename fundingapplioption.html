@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Owners Table</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            padding: 40px; /* Increased padding for a more spacious look */
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px; /* Slightly increased font size for emphasis */
+            color: #007ACC;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        button, a {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 15px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+        button:hover, a:hover {
+            background-color: #005999;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Welcome to PerformanceMetrics Table</h1>
+        <p>Click on the below buttons for certain operations:</p>
+        
+        <button <a href="index2.php" id="displayTableBt" onclick="displayTabl()">Display Table</a></button>
+        <button <a href="perfromance.html" id="displayTableBtn" onclick="displayTable()">Insert Values</a></button>
+        <button id="updateValuesBtn" onclick="updateValues()">Update Values</button>
+        <button id="deleteValues" onclick="deleteValues()">Delete Values</button>
+
+        <script>
+            var delet;
+            // JavaScript code for button actions
+            function displayTable() {
+                // Replace this with the actual logic to display the table
+                alert("Insert Table button clicked");
+                
+                // Navigate to owners.html
+                window.location.href = "perfromance.html";
+
+            }
+            function displayTabl() {
+                // Replace this with the actual logic to display the table
+                alert("Display Table button clicked");
+                
+                // Navigate to owners.html
+                window.location.href = "index2.php";
+            }
+
+            function updateValues() {
+                // Replace this with the actual logic to update values
+                alert("Update Values button clicked");
+            }
+            function deleteValues(){
+                 delet = window.prompt("Enter the id ");
+                 window.location.href = "index2.php";
+                 if (delet == null || delet.length == 0) {
+                    alert("Please enter something");
+                    return false;
+                 }
+                 if (delet !== null) {  
+            // Create a new XMLHttpRequest object
+                    var xhr = new XMLHttpRequest();
+
+            // Configure it: POST-request for the URL /path/to/your/php/script.php
+                    xhr.open('POST', 'del3.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                    // Send the request with the user input
+                    xhr.send('pm=' + encodeURIComponent(delet));
+                 
+            }
+        }
+        </script>
+    </div>
+</body>
+</html>

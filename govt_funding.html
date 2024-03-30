@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Government Funding Program Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 60px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007ACC;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical; 
+
+        }
+
+        input[type="submit"] {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Government Funding Program Form</h1>
+        <form id="programForm" onsubmit="return validateForm()"   method = "post" action = "ee3.php">
+            <label for="program_id">Program ID (Primary Key):</label>
+            <input type="text" id="program_id" name="program_id" required>
+            <br><br>
+
+            <label for="program_name">Program Name:</label>
+            <input type="text" id="program_name" name="program_name" required>
+            <br><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var programId = document.getElementById("program_id").value;
+            if (programId.trim() === "") {
+                alert("Program ID cannot be empty");
+                return false;
+            }
+
+            var programName = document.getElementById("program_name").value;
+            if (programName.trim() === "") {
+                alert("Program Name cannot be empty");
+                return false;
+            }
+
+            var description = document.getElementById("description").value;
+            if (description.trim() === "") {
+                alert("Description cannot be empty");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

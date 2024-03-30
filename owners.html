@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owner Information Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            background-image: url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            text-align: center;
+            
+            margin: 0;
+            padding: 0;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: #89d8ef;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 60px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #007ACC;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="tel"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #005999;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Owner Information Form</h1>
+        <form id="ownerForm" action="ee.php" onsubmit="return validateForm()" method="post">
+
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            <br><br>
+            
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
+            <br><br>
+
+            <label for="date_of_birth">Date of Birth:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
+            <br><br>
+
+            <label for="contact_number">Contact Number:</label>
+            <input type="tel" id="contact_number" name="contact_number" pattern="[0-9]{10}" required>
+            <small>Enter a valid 10-digit phone number.</small>
+            <br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <small id="emailError" style="color: red;"></small>
+            <br><br>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <br><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var ownerID = document.getElementById('owner_id').value;
+            if (ownerID.trim() === '') {
+                alert('Owner ID is required!');
+                return false;
+            }
+
+            var firstName = document.getElementById('first_name').value;
+            if (firstName.trim() === '') {
+                alert('First Name is required!');
+                return false;
+            }
+
+            var lastName = document.getElementById('last_name').value;
+            if (lastName.trim() === '') {
+                alert('Last Name is required!');
+                return false;
+            }
+
+            var dob = document.getElementById('date_of_birth').value;
+            if (dob.trim() === '') {
+                alert('Date of Birth is required!');
+                return false;
+            }
+
+            var contactNumber = document.getElementById('contact_number').value;
+            if (contactNumber.trim() === '' || !contactNumber.match(/^\d{10}$/)) {
+                alert('Please enter a valid 10-digit contact number!');
+                return false;
+            }
+
+            var email = document.getElementById('email').value;
+            var emailError = document.getElementById('emailError');
+            if (email.trim() === '') {
+                emailError.innerText = 'Email is required!';
+                return false;
+            } else {
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    emailError.innerText = 'Please enter a valid email address!';
+                    return false;
+                } else {
+                    emailError.innerText = '';
+                }
+            }
+
+            var address = document.getElementById('address').value;
+            if (address.trim() === '') {
+                alert('Address is required!');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

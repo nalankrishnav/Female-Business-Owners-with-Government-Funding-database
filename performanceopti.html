@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Owners Table</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            padding: 40px; /* Increased padding for a more spacious look */
+            text-align: center;
+            color: #333;
+        }
+
+        h1 {
+            font-size: 36px; /* Slightly increased font size for emphasis */
+            color: #007ACC;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        button, a {
+            background-color: #007ACC;
+            color: #fff;
+            padding: 15px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+
+        button:hover, a:hover {
+            background-color: #005999;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>Welcome to PerformanceMetrics Table</h1>
+        <p>Click on the below buttons for certain operations:</p>
+        
+        <button <a href="displaypurf.php" id="displayTableBt" onclick="displayTabl()">Display Table</a></button>
+        <button <a href="perfromance.html" id="displayTableBtn" onclick="displayTable()">Insert Values</a></button>
+        <button id="updateValues" onclick="updateValues()">Update Values</button>
+        <button id="deleteValues" onclick="deleteValues()">Delete Values</button>
+        <button id="updateValuesBtn" onclick="update()">Pie chart for Employees count</button>
+
+        <script>
+            // JavaScript code for button actions
+            function displayTable() {
+                alert("Insert Table button clicked");
+                window.location.href = "perfromance.html";
+            }
+
+            function displayTabl() {
+                alert("Display Table button clicked");
+                window.location.href = "displaypurf.php";
+            }
+
+            function updateValues() {
+                var metricsIdUpdate = window.prompt("Enter the Metrics ID for the row to be updated");
+
+                if (metricsIdUpdate == null || metricsIdUpdate.length == 0) {
+                    alert("Please enter a value for Metrics ID");
+                    return false;
+                }
+
+                var columns = ['business_id', 'Year', 'revenue', 'profit', 'employees_count'];
+                var selectedColumn = window.prompt("Choose a column to update:\n" + columns.join(', '));
+
+                if (!columns.includes(selectedColumn)) {
+                    alert("Invalid column selection");
+                    return false;
+                }
+
+                var columnValue = window.prompt("Enter the new value for " + selectedColumn);
+
+                if (columnValue == null || columnValue.length == 0) {
+                    alert("Please enter a value for the selected column");
+                    return false;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'update3.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send('metrics_id=' + encodeURIComponent(metricsIdUpdate) +
+                    '&column_name=' + encodeURIComponent(selectedColumn) +
+                    '&column_value=' + encodeURIComponent(columnValue));
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert(xhr.responseText);
+                    }
+                };
+            }
+
+            function update() {
+                alert("Pie chart button clicked");
+                window.location.href = "pie.php";
+            }
+
+            function deleteValues() {
+                var delet = window.prompt("Enter the id ");
+
+                if (delet == null || delet.trim().length === 0) {
+                    alert("Please enter something");
+                    return false;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'del3.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        alert(xhr.responseText);
+                    }
+                };
+                xhr.send('pm=' + encodeURIComponent(delet));
+            }
+        </script>
+    </div>
+</body>
+</html>

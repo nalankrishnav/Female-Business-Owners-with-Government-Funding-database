@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart</title>
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div id="pie-container" style="height: 500px; width: 600px;"></div>
+
+    <script>
+        // Function to update the pie chart
+        function updatePieChart() {
+            $.ajax({
+                url: 'getChartData.php', // PHP script to fetch updated data
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var chart = anychart.pie();
+
+                    // Set the chart title
+                    chart.title("Employees Count by Business");
+
+                    // Add the updated data
+                    chart.data(data);
+
+                    // Display the chart in the container
+                    chart.container('pie-container');
+                    chart.sort("desc");
+                    chart.legend().position("right");
+                    // Set items layout
+                    chart.legend().itemsLayout("vertical");
+
+                    chart.draw();
+                },
+                error: function (error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        }
+
+        // Call the function initially
+        updatePieChart();
+
+        // Optionally, you can set up a timer to update the chart periodically
+        setInterval(updatePieChart, 5000); // Update every 5 seconds (adjust as needed)
+    </script>
+</body>
+</html>
